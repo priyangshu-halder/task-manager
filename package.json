@@ -1,0 +1,34 @@
+{
+  "name": "task-manager",
+  "version": "1.0.0",
+  "description": "Task management web application",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priyangshu-halder/task-manager.git"
+  },
+  "keywords": [
+    "express",
+    "task",
+    "manager",
+    "mongoose",
+    "backend",
+    "CRUD",
+    "application"
+  ],
+  "author": "Priyangshu Halder",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/priyangshu-halder/task-manager/issues"
+  },
+  "homepage": "https://github.com/priyangshu-halder/task-manager#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.2"
+  }
+}
