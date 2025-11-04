@@ -4,7 +4,7 @@ const clientSchema = new Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
       trim: true,
     },
     company_name: {

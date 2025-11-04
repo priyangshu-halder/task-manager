@@ -23,7 +23,7 @@ const userSchema = new Schema(
       trim: true,
     },
     role: {
-      type: string,
+      type: String,
     },
     avatar: {
       type: {
@@ -64,4 +64,4 @@ const userSchema = new Schema(
   }
 )
 
-export const User = new mongoose.model('User', userSchema)
+export const User = mongoose.model('User', userSchema)
