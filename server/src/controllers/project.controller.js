@@ -83,7 +83,7 @@ const updateProject = asyncHandler(async (req, res) => {
   if (Object.keys(updateFields).length === 0) {
     throw new apiError(400, 'No fields to update')
   }
-  
+
   await Project.findOneAndUpdate({ project_name: projectName }, { $set: updateFields })
 
   return res.status(200).json(new apiResponse(200, {}, `Project has been updated`))

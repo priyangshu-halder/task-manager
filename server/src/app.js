@@ -1,9 +1,12 @@
 import express from 'express'
+import projectRouter from './routes/project.route.js'
 
 const app = express()
-// app.get("/", (req, res)=>{res.send("KHHKJ")})
 
-// import projectRouter from '.routes/project.router.js'
-// app.use('/project', projectRouter)
+app.use(express.json())
+
+app.get("/", (req, res)=>{res.send("KHHKJ")})
+
+app.use('/project', projectRouter)
 
 export default app
