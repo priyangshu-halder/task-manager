@@ -5,10 +5,12 @@ const taskSchema = new Schema(
     project_id: {
       type: Schema.Types.ObjectId,
       ref: 'Project',
+      required: true,
     },
     task_name: {
       type: String,
       trim: true,
+      required: true,
     },
     description: {
       type: String,
@@ -27,16 +29,16 @@ const taskSchema = new Schema(
       trim: true,
     },
     assigned_to: {
-      type: Schema.types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
     },
     created_by: {
-      type: Schema.type.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'User',
     },
     parent_task_id: {
-      type: Schema.type.ObjectId,
-      ref: 'Project',
+      type: Schema.Types.ObjectId,
+      ref: 'Task',
     },
     due_date: {
       type: Date,
@@ -52,5 +54,6 @@ const taskSchema = new Schema(
 
 taskSchema.index({ project_id: 1, status: 1 })
 taskSchema.index({ assigned_to: 1 })
+taskSchema.index({ project_id: 1, task_name: 1 })
 
 export const Task = mongoose.model('Task', taskSchema)

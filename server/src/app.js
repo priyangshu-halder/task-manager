@@ -5,7 +5,9 @@ const app = express()
 
 app.use(express.json())
 
-app.get("/", (req, res)=>{res.send("KHHKJ")})
+app.get('/', (req, res) => {
+  res.send('KHHKJ')
+})
 
 app.use('/project', projectRouter)
 

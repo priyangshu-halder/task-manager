@@ -3,17 +3,25 @@ import { Project } from '../models/projects.models.js'
 import { apiResponse } from '../utils/api-response.js'
 import { apiError } from '../utils/api-error.js'
 
+// list all project
+const listProjects = asyncHandler(async (req, res) => {
+  const projects = await Project.find()
+  return res
+    .status(200)
+    .json(new apiResponse(200, projects, 'Projects has been fetched successfully'))
+})
+
+// find project
 const findProject = asyncHandler(async (req, res) => {
-  const { projectName } = req.body
-  const existedProject = await Project.findOne({
-    project_name: projectName,
-  })
+  const projectId = req.params.id
+  const existedProject = await Project.findById(projectId)
   if (!existedProject) {
     throw new apiError(409, 'This project does not exist')
   }
   return res.status(200).json(new apiResponse(200, existedProject, `Project found sucessfully`))
 })
 
+// create project
 const createProject = asyncHandler(async (req, res) => {
   const { projectName, description, team_members, start_date, end_date, status, additional_info } =
     req.body
@@ -37,19 +45,19 @@ const createProject = asyncHandler(async (req, res) => {
     .json(new apiResponse(200, project, `Project ${projectName} created sucessfully`))
 })
 
+// delete project
 const deleteProject = asyncHandler(async (req, res) => {
-  const { projectName } = req.body
-  const project = await Project.findOne({
-    project_name: projectName,
-  })
+  const projectId = req.params.id
+  const project = await Project.findById(projectId)
   if (!project) {
-    throw new apiError(400, `Project name ${projectName} not found`)
+    throw new apiError(400, `Project not found`)
   }
-  await Project.deleteOne(project)
+  await Project.findByIdAndDelete(projectId)
 
   return res.status(200).json(new apiResponse(200, {}, `Project has been deleted`))
 })
 
+// Update project
 const updateProject = asyncHandler(async (req, res) => {
   const {
     projectName,
@@ -61,11 +69,10 @@ const updateProject = asyncHandler(async (req, res) => {
     status,
     additional_info,
   } = req.body
-  const project = await Project.findOne({
-    project_name: projectName,
-  })
+  const projectId = req.params.id
+  const project = await Project.findById(projectId)
   if (!project) {
-    throw new apiError(409, 'This project does not exist')
+    throw new apiError(409, 'Project does not exist')
   }
   const updateFields = {}
   if (changedName !== undefined) {
@@ -84,9 +91,9 @@ const updateProject = asyncHandler(async (req, res) => {
     throw new apiError(400, 'No fields to update')
   }
 
-  await Project.findOneAndUpdate({ project_name: projectName }, { $set: updateFields })
+  await Project.findOneAndUpdate(projectId, { $set: updateFields }, { new: true })
 
   return res.status(200).json(new apiResponse(200, {}, `Project has been updated`))
 })
 
-export { findProject, createProject, updateProject, deleteProject }
+export { listProjects, findProject, createProject, updateProject, deleteProject }
