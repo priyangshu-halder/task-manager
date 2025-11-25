@@ -60,7 +60,7 @@ const deleteProject = asyncHandler(async (req, res) => {
 // Update project
 const updateProject = asyncHandler(async (req, res) => {
   const {
-    projectName,
+    // projectName,
     changedName,
     description,
     team_members,
@@ -76,7 +76,10 @@ const updateProject = asyncHandler(async (req, res) => {
   }
   const updateFields = {}
   if (changedName !== undefined) {
-    if (changedName === '' || changedName === projectName) {
+    const nameExists = await Project.findOne({
+      project_name: changedName,
+    })
+    if (changedName === '' || nameExists) {
       throw new apiError(400, 'Please provide a different project name')
     }
     updateFields.project_name = changedName
@@ -91,9 +94,13 @@ const updateProject = asyncHandler(async (req, res) => {
     throw new apiError(400, 'No fields to update')
   }
 
-  await Project.findOneAndUpdate(projectId, { $set: updateFields }, { new: true })
+  const updatedProject = await Project.findByIdAndUpdate(
+    projectId,
+    { $set: updateFields },
+    { new: true }
+  )
 
-  return res.status(200).json(new apiResponse(200, {}, `Project has been updated`))
+  return res.status(200).json(new apiResponse(200, updatedProject, `Project has been updated`))
 })
 
 export { listProjects, findProject, createProject, updateProject, deleteProject }

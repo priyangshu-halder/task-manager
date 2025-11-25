@@ -7,11 +7,11 @@ import {
   updateTask,
 } from '../controllers/task.controller.js'
 
-const router = Router()
-router.route('/tasks').get(listTasks)
-router.route('/findTask/:id').get(findTask)
-router.route('/createTask').post(createTask)
-router.route('/updateTask/:id').post(updateTask)
-router.route('/deleteTask/:id').post(deleteTask)
+const router = Router({ mergeParams: true })
+router.route('/').get(listTasks)
+router.route('/').post(createTask)
+router.route('/:taskid').get(findTask)
+router.route('/:taskid/update').post(updateTask)
+router.route('/:taskid/delete').post(deleteTask)
 
 export default router

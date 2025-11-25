@@ -8,10 +8,10 @@ import {
 } from '../controllers/project.controller.js'
 
 const router = Router()
-router.route('/projects').get(listProjects)
-router.route('/findProject/:id').get(findProject)
-router.route('/createProject').post(createProject)
-router.route('/updateProject/:id').post(updateProject)
-router.route('/deleteProject/:id').post(deleteProject)
+router.route('/').get(listProjects)
+router.route('/create').post(createProject)
+router.route('/:id').get(findProject)
+router.route('/:id/update').post(updateProject)
+router.route('/:id/delete').post(deleteProject)
 
 export default router

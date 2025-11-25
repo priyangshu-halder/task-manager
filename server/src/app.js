@@ -1,5 +1,6 @@
 import express from 'express'
 import projectRouter from './routes/project.route.js'
+import taskRouter from './routes/task.route.js'
 
 const app = express()
 
@@ -10,5 +11,6 @@ app.get('/', (req, res) => {
 })
 
 app.use('/project', projectRouter)
+app.use('/project/:id/tasks', taskRouter)
 
 export default app
