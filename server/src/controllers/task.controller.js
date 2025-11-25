@@ -62,8 +62,7 @@ const updateTask = asyncHandler(async (req, res) => {
     estimated_time,
   } = req.body
   const taskId = req.params.taskid
-  const projectId=req.params.id
-  // const task = await Task.findById(taskId)
+  const projectId = req.params.id
   const updateFields = {}
   if (changedName !== undefined) {
     const task = await Task.findById(taskId)
