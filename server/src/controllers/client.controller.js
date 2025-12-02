@@ -4,6 +4,14 @@ import { asyncHandler } from '../utils/async-handler'
 import { apiResponse } from '../utils/api-response'
 import { apiError } from '../utils/api-error'
 
+// get client
+const getClient = asyncHandler(async (req, res) => {
+  const projectId = req.body
+  const client = await Client.find({ project_id: projectId })
+  return res.status(200).json(new apiResponse(200, client))
+})
+
+// create client
 const createClient = asyncHandler(async (req, res) => {
   const { name, companyName, contactPerson, email, contactNumber, address, projectId } = req.body
   if (name === '' || name == undefined || !projectId)
@@ -28,6 +36,8 @@ const createClient = asyncHandler(async (req, res) => {
   })
   return res.status(200).json(new apiResponse(200, client, `Client ${name} created successfully`))
 })
+
+// update client
 const updateClient = asyncHandler(async (req, res) => {
   const clientId = req.params.id
   const { name, companyName, contactPerson, email, contactNumber, address, projectId } = req.body
@@ -49,11 +59,14 @@ const updateClient = asyncHandler(async (req, res) => {
   )
   return res.status(200).json(new apiResponse(200, updatedClient))
 })
-const deleteClient=asyncHandler(async (req, res)=>{
-    const clientId=req.params.id
-    const client=await Client.findById(clientId)
-    if(!client) throw new apiError(404, `Client does not exist`)
-    await Client.findByIdAndDelete(clientId)
-    return res.status(200).json(new apiResponse(200, [], 'Deleted'))
+
+// delete client
+const deleteClient = asyncHandler(async (req, res) => {
+  const clientId = req.params.id
+  const client = await Client.findById(clientId)
+  if (!client) throw new apiError(404, `Client does not exist`)
+  await Client.findByIdAndDelete(clientId)
+  return res.status(200).json(new apiResponse(200, [], 'Deleted'))
 })
-export { createClient, updateClient, deleteClient }
+
+export { createClient, updateClient, deleteClient, getClient }
