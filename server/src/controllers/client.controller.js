@@ -1,8 +1,8 @@
-import { Client } from '../models/client.models'
-import { Project } from '../models/projects.models'
-import { asyncHandler } from '../utils/async-handler'
-import { apiResponse } from '../utils/api-response'
-import { apiError } from '../utils/api-error'
+import { Client } from '../models/client.models.js'
+import { Project } from '../models/projects.models.js'
+import { asyncHandler } from '../utils/async-handler.js'
+import { apiResponse } from '../utils/api-response.js'
+import { apiError } from '../utils/api-error.js'
 
 // get client
 const getClient = asyncHandler(async (req, res) => {

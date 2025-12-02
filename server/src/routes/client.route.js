@@ -4,7 +4,7 @@ import {
   createClient,
   updateClient,
   deleteClient,
-} from '../controllers/client.controller'
+} from '../controllers/client.controller.js'
 const router = Router()
 router.get('/client', getClient)
 router.post('/create', createClient)
