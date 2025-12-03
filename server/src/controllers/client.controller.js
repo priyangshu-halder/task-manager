@@ -6,8 +6,9 @@ import { apiError } from '../utils/api-error.js'
 
 // get client
 const getClient = asyncHandler(async (req, res) => {
-  const projectId = req.body
+  const { projectId } = req.body
   const client = await Client.find({ project_id: projectId })
+  if (!client) throw new apiError(409, 'Client not found')
   return res.status(200).json(new apiResponse(200, client))
 })
 

@@ -28,10 +28,12 @@ const taskSchema = new Schema(
       default: 'in_progress',
       trim: true,
     },
-    assigned_to: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-    },
+    assigned_to: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
     created_by: {
       type: Schema.Types.ObjectId,
       ref: 'User',
