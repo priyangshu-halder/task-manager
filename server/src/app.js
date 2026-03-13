@@ -1,19 +1,9 @@
 import express from 'express'
-import projectRouter from './routes/project.route.js'
-import taskRouter from './routes/task.route.js'
-import clientRouter from './routes/client.route.js'
-import sprintRouter from './routes/sprint.route.js'
+import router from './routes/v1/index.js'
 
 const app = express()
 
 app.use(express.json())
-
-app.get('/', (req, res) => {
-  res.send('KHHKJ')
-})
-
-app.use('/project', projectRouter)
-app.use('/project/:id/tasks', taskRouter)
-app.use('/project/:id/sprints', sprintRouter)
-app.use('/client', clientRouter)
+app.use(express.urlencoded({ extended: true }))
+app.use("api/v1", router)
 export default app

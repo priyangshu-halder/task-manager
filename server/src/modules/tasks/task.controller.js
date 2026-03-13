@@ -1,8 +1,8 @@
-import { asyncHandler } from '../utils/async-handler.js'
-import { Task } from '../models/task.models.js'
-import { Project } from '../models/projects.models.js'
-import { apiResponse } from '../utils/api-response.js'
-import { apiError } from '../utils/api-error.js'
+import { asyncHandler } from '../../utils/async-handler.js'
+import { Task } from '../../database/models/task.models.js'
+import { Project } from '../../database/models/projects.models.js'
+import { apiResponse } from '../../utils/api-response.js'
+import { apiError } from '../../utils/api-error.js'
 
 // list all Tasks
 const listTasks = asyncHandler(async (req, res) => {

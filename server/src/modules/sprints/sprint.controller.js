@@ -1,8 +1,8 @@
-import { apiResponse } from '../utils/api-response.js'
-import { apiError } from '../utils/api-error.js'
-import { asyncHandler } from '../utils/async-handler.js'
-import { Sprint } from '../models/sprint.models.js'
-import { Project } from '../models/projects.models.js'
+import { apiResponse } from '../../utils/api-response.js'
+import { apiError } from '../../utils/api-error.js'
+import { asyncHandler } from '../../utils/async-handler.js'
+import { Sprint } from '../../database/models/sprint.models.js'
+import { Project } from '../../database/models/projects.models.js'
 
 // list all sprint
 const listSprint = asyncHandler(async (req, res) => {
